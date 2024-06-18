@@ -1,7 +1,9 @@
 from flask import Flask, jsonify
+from flask_cors import CORS
 import psycopg2
 
 app = Flask(__name__)
+CORS(app)
 
 # Database configuration
 DB_CONFIG = {
@@ -83,7 +85,7 @@ def get_latest_gas():
     else:
         return jsonify({"error": "No data found"}), 404
 
-@app.route('/humidity', methods=['GET'])
+@app.route('/humidity/', methods=['GET'])
 def get_latest_humidity():
     result = get_most_recent_reading('humidity')
     if result:
@@ -91,7 +93,7 @@ def get_latest_humidity():
     else:
         return jsonify({"error": "No data found"}), 404
 
-@app.route('/pressure', methods=['GET'])
+@app.route('/pressure/', methods=['GET'])
 def get_latest_pressure():
     result = get_most_recent_reading('pressure')
     if result:
